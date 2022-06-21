@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    
+    <div class="todos">
+        <h2>Your Todo Lists</h2>
+
+        <div class="todolists">
+            <ul>
+                <% if(lists.length > 0){ %>
+                    <% lists.forEach(list => { %>
+                        <li>
+                            <p><%= list.todo %></p>
+                            <i class="bi bi-trash-fill" data-doc="<%= list._id %>"></i>
+                        </li>
+                    <% }) %>
+                <% }else { %>
+                    <p>Add a todo list...</p>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const ul = document.querySelector('ul');
+
+        ul.addEventListener('click', e => {
+            if(e.target.classList.value === 'bi bi-trash-fill') {
+                const endpoint = `/todos/${e.target.dataset.doc}`;
+
+                fetch(endpoint, { method: 'DELETE' })
+                .then(response => response.json())
+                .then(data => window.location.href = data.redirect)
+                .catch(error => console.log(error));
+            }
+        });
+    </script>
+</body>
+</html>
