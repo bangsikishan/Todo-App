@@ -4,6 +4,10 @@
 <body>
     <%- include('./partials/navbar.ejs') %>
     
+    <div class="popup invisible">
+        <p>Field cannot be empty!</p>
+    </div>
+
     <div class="main">
         <div class="input">
             <form action="/" method="POST">
@@ -27,5 +31,22 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        const form = document.querySelector('form');
+        const popup = document.querySelector('.popup');
+
+        form.addEventListener('submit', (e) => {
+            let todo = form.todo.value.trim();
+            if(todo.length === 0) {
+                e.preventDefault();
+                popup.classList.remove('invisible');
+
+                setTimeout(() => {
+                    popup.classList.add('invisible');
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>
