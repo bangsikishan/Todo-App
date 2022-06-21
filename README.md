@@ -27,7 +27,7 @@ npm install
 - After installation, enter `node server` to run the server.js file. This will start the server.
 - If everything is running, you can visit by going to  `localhost:<YOUR_PORT_NUMBER>` in your browser.
 
-# Notes
+## Notes
 
 ***Do not forget to create a `.env` file, and enter port and database name inside it.*** 
 
